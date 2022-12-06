@@ -1,0 +1,53 @@
+<div class="container mt-3">
+  <h1 class="text-center">Reactive Form</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="form">
+        <div formGroupName="heroForm">
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" id="name" class="form-control" formControlName="name">
+            <span *ngIf="getFormC('heroForm.name')?.invalid && getFormC('heroForm.name')?.touched">
+              <ng-container *ngIf="getErrorC('heroForm.name', 'required')"><p class="text-danger fw-bold">Campo Nome obbligatorio</p></ng-container>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="alterEgo">alter Ego</label>
+            <input type="text" id="alterEgo" class="form-control" formControlName="alterEgo">
+            <span *ngIf="getFormC('heroForm.alterEgo')?.invalid && getFormC('heroForm.alterEgo')?.touched">
+              <ng-container *ngIf="getErrorC('heroForm.alterEgo', 'required')"><p class="text-danger fw-bold">Campo Alter Ego obbligatorio</p></ng-container>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="enemy">Nemico</label>
+            <input type="text" id="enemy" class="form-control" formControlName="enemy">
+          </div>
+          <div class="form-group">
+            <label for="planet">Pianeti</label>
+            <input type="text" id="planet" class="form-control" formControlName="planet">
+            <span *ngIf="getFormC('heroForm.planet')?.invalid && getFormC('heroForm.planet')?.touched">
+              <ng-container *ngIf="getErrorC('heroForm.planet', 'required')"><p class="text-danger fw-bold">Il campo deve avere minimo 5 caratteri.</p></ng-container>
+              </span>
+          </div>
+          </div>
+          <div formArrayName="power" class="mb-3">
+            <p>Superpoteri</p>
+            <button type="button" class="btn btn-success" (click)="addPowers()">Aggiungi poteri</button>
+            <div class="form-group mb-2" *ngFor="let power of getPowers(); let i = index">
+              <input type="text" class="form-control" [formControlName]="i">
+            </div>
+          </div>
+          <div formArrayName="weakness" class="mb-3">
+            <p>Debolezze</p>
+            <button type="button" class="btn btn-success" (click)="addWeakness()">Aggiungi debolezze</button>
+            <div class="form-group mb-2" *ngFor="let Weakness of getWeakness(); let i = index">
+              <input type="text" class="form-control" [formControlName]="i">
+            </div>
+          </div>
+        <button type="submit" (click)="submit()" class="btn btn-primary" [disabled]="form.invalid">Invia</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="container">
+  <h1 class="text-center">TD Form Hero</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div>
+          <form (ngSubmit)="submit(tdForm)" #tdForm="ngForm">
+            <div>
+              <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" [ngModel]="heroForm.name" name="name" class="form-control" required #name="ngModel">
+                <p class="text-danger" *ngIf="name.invalid && name.touched">
+                  <strong>Questo campo è obbligatorio</strong>
+                </p>
+              </div>
+              <div class="form-group">
+                <label for="alterEgo">Alter Ego</label>
+                <input type="text" id="alterEgo" [ngModel]="heroForm.alterEgo" name="alterEgo" class="form-control" required #alterEgo="ngModel">
+                <p class="text-danger" *ngIf="alterEgo.invalid && alterEgo.touched">
+                  <strong>Questo campo è obbligatorio</strong>
+                </p>
+              </div>
+              <div class="form-group">
+                <label for="power">Superpotere</label>
+                <select name="power" id="power" class="form-select" required #power="ngModel" [ngModel]="heroForm.power">
+                  <option value="forza">Super forza</option>
+                  <option value="velocità">Super velocità</option>
+                  <option value="volo">Capacità di volare</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="enemy">Nemico</label>
+                <input type="text" id="enemy" [ngModel]="heroForm.enemy" name="enemy" class="form-control" #enemy="ngModel">
+              </div>
+              <div class="form-group">
+                <label for="planet">Pianeta</label>
+                <input type="text" id="planet" [ngModel]="heroForm.planet" name="planet" class="form-control" required minlength="5" #planet="ngModel">
+                <p class="text-danger" *ngIf="planet.invalid && planet.touched">
+                  <strong>Hai inserito {{planet.value.length}} caratteri. Deve contenere minimo 5 caratteri!</strong>
+                </p>
+              </div>
+              <div class="form-group">
+                <label for="weakness">Debolezza</label>
+                <input type="text" id="weakness" [ngModel]="heroForm.weakness" name="weakness" class="form-control" #weakness="ngModel">
+              </div>
+              <button type="submit" class="btn btn-primary mt-3" [disabled]="tdForm.invalid">
+                Invia
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
